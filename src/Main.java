@@ -1,29 +1,38 @@
+import java.util.Scanner;
 
 public class Main {
 	
 	public static void main(String[] args) {
+			
 		
-		Cliente antonio = new Cliente();
+		Cliente cliente = new Cliente(null, null);
 		 
-		antonio.setNome("antonio");
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("DIGITE O NOME DO TITULAR: ");
+		cliente.setNome(scan.next());
 		
 		
-		Conta cc = new ContaCorrente(antonio);
+		System.out.println("\nDIGITE A CIDADE: ");
+		cliente.setCidade(scan.next());
 		
-		cc.depositar(100);
 		
-		Conta poupanca = new ContaPoupanca(antonio);
+		Conta cc = new ContaCorrente(cliente);
 		
-		cc.transferir(100, poupanca);
+		Conta poupanca = new ContaPoupanca(cliente);
+
 		
-		poupanca.transferir(10, cc);
+		System.out.println("DIGITE O VALOR DE DEPOSITO EM CONTA CORRENTE");
+		cc.depositar(scan.nextDouble());
+						
+		System.out.println("\nDIGITE O VALOR DE TRANSFERENCIA DA CONTA CORRENTE");
+		cc.transferir(scan.nextDouble(), poupanca);
+		
+		
+		System.out.println("\nDIGITE O VALOR DE SAQUE DA CONTA POUPANÇA");
+		poupanca.sacar(scan.nextDouble());
 		
 		cc.imprimirExtrato();
-		
-		
-		
-		poupanca.sacar(48);
-		
 		poupanca.imprimirExtrato();
 	}
 
